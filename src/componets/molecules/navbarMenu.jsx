@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import styles from './navbarMenu.module.css';
 import { NavbarLink } from "../atoms/navbarLink";
 
 function NavbarMenu() {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const menuRef = useRef(null); // referencia al contenedor
 
   const menu = [
-    {
-      href: '/register',
-      text: 'Registro',
-    },
     {
       href: '/students',
       text: 'Estudiantes',
@@ -26,14 +23,21 @@ function NavbarMenu() {
       text: 'Docentes',
       submenu: [
         { href: '/teachers/courses', text: 'Cursos' },
-        { href: '/teachers/careers', text: 'Carreras' },
-        { href: '/teachers/schedule', text: 'Horario' },
+        { href: '/teachers/schedule', text: 'Horarios' },
         { href: '/teachers/evaluations', text: 'Evaluaciones' },
       ]
     },
     {
-      href: '/contact',
-      text: 'Contacto',
+      href: '/attendance',
+      text: 'Asistencias',
+      submenu: [
+        { href: '/attendance/entry ', text: 'Entrada' },
+        { href: '/attendance/classroom ', text: 'Aulas' },
+      ]
+    },
+    {
+      href: '/aboutUs',
+      text: 'Institución',
     },
   ];
 
@@ -41,13 +45,25 @@ function NavbarMenu() {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
+  // Detectar clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <ul className={styles.navbarMenu}>
+    <ul className={styles.navbarMenu} ref={menuRef}>
       {menu.map((item, index) => (
-        <li 
-          key={index} 
-          className={styles.item}
-        >
+        <li key={index} className={styles.item}>
           {item.submenu ? (
             <div className={styles.dropdownWrapper}>
               <button
@@ -76,7 +92,11 @@ function NavbarMenu() {
               )}
             </div>
           ) : (
-            <NavbarLink href={item.href} text={item.text} className={styles.linkMenu}/>
+            <NavbarLink 
+              href={item.href} 
+              text={item.text} 
+              className={styles.linkMenu}
+            />
           )}
         </li>
       ))}

@@ -1,6 +1,6 @@
 import styles from './contactPage.module.css'
 
-function ContactPage() {
+function AboutUs() {
   return (
     <section className={styles.contact}>
       <h2>Contacto</h2>
@@ -8,4 +8,4 @@ function ContactPage() {
   )
 }
 
-export { ContactPage }
+export { AboutUs }

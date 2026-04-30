@@ -1,0 +1,576 @@
+.loginContainer {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: linear-gradient(to top left, rgba(166, 166, 166, 0.29) 50%, #ffffff 50%);
+  overflow-x: hidden;
+}
+
+.containerlogo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 40vw;
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+.logoLogin {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -15em);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.458);
+  max-width: 100%;
+  height: auto;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 4em);
+  color: brown;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+.paragraph {
+  font-size: clamp(1rem, 2.5vw, 1.8em);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.loginBox {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.478);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 3em;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.loginIcon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: linear-gradient(rgb(3, 45, 60));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.loginIcon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+.loginHeader h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 10px 0;
+}
+
+.loginHeader p {
+  color: #718096;
+  font-size: 14px;
+  margin: 0;
+}
+
+.loginForm {
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 20px;
+  color: #a0aec0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inputWrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
+  font-size: 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.4s ease;
+  box-sizing: border-box;
+}
+
+.inputWrapper input:hover,
+.inputWrapper input:focus {
+  border-color: brown;
+  box-shadow: 0 0 0 3px rgba(165, 42, 42, 0.1);
+}
+
+.inputWrapper input::placeholder {
+  color: #cbd5e0;
+}
+
+.togglePassword {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.togglePassword:hover {
+  opacity: 0.7;
+}
+
+.togglePassword svg {
+  width: 20px;
+  height: 20px;
+  color: #a0aec0;
+}
+
+.errorMessage {
+  background-color: #fed7d7;
+  color: #c53030;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #fc8181;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(3, 45, 60);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.loginButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.loginButton:active {
+  transform: translateY(0);
+}
+
+.loginInfo p {
+  margin: 5px 0;
+}
+
+.loginInfo strong {
+  color: #2d3748;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Pantallas grandes (Desktop) */
+@media (max-width: 1400px) {
+  .containerlogo {
+    max-width: 45vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .loginBox {
+    max-width: 380px;
+    right: 8%;
+  }
+  
+  .containerlogo {
+    max-width: 50vw;
+  }
+}
+
+/* Tablets landscape */
+@media (max-width: 1024px) {
+  .loginContainer {
+    padding: 15px;
+  }
+  
+  .loginBox {
+    max-width: 360px;
+    padding: 2.5em;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .containerlogo {
+    max-width: 55vw;
+  }
+  
+  .title {
+    font-size: 3em;
+  }
+  
+  .paragraph {
+    font-size: 1.5em;
+  }
+}
+
+/* Tablets portrait */
+@media (max-width: 768px) {
+  .loginContainer {
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    gap: 40px;
+  }
+  
+  .loginBox {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    max-width: 100%;
+    width:45em;
+    padding: 2em;
+    margin: 0 auto;
+  }
+  
+  .containerlogo {
+    min-width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .logoLogin {
+    position: relative;
+    transform: translate(-50%, 0);
+    left: 50%;
+    margin-bottom: 2em;
+  }
+  
+  .title {
+    font-size: 2.5em;
+  }
+  
+  .paragraph {
+    font-size: 1.3em;
+  }
+}
+
+/* Móviles grandes */
+@media (max-width: 576px) {
+  .loginContainer {
+    padding: 15px;
+    gap: 30px;
+  }
+  
+  .loginBox {
+    width: 42em;
+  }
+  
+  .loginHeader {
+    margin-bottom: 25px;
+  }
+  
+  .loginIcon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .loginIcon svg {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .loginHeader h1 {
+    font-size: 24px;
+  }
+  
+  .loginHeader p {
+    font-size: 13px;
+  }
+  
+  .formGroup {
+    margin-bottom: 18px;
+  }
+  
+  .formGroup label {
+    font-size: 13px;
+  }
+  
+  .inputWrapper input {
+    padding: 11px 11px 11px 40px;
+    font-size: 13px;
+  }
+  
+  .inputIcon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .togglePassword svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .loginButton {
+    padding: 12px;
+    font-size: 15px;
+  }
+  
+  .title {
+    font-size: 2em;
+  }
+  
+  .paragraph {
+    font-size: 1.1em;
+  }
+}
+
+/* Móviles medianos */
+@media (max-width: 480px) {
+  .loginContainer {
+    padding: 12px;
+    gap: 25px;
+  }
+  
+  .loginBox {
+    padding: 1.3em;
+  }
+  
+  .loginIcon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+  
+  .loginIcon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .loginHeader h1 {
+    font-size: 22px;
+  }
+  
+  .loginHeader p {
+    font-size: 12px;
+  }
+  
+  .loginHeader {
+    margin-bottom: 20px;
+  }
+  
+  .formGroup {
+    margin-bottom: 16px;
+  }
+  
+  .inputWrapper input {
+    padding: 10px 10px 10px 38px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  
+  .inputIcon {
+    left: 10px;
+  }
+  
+  .togglePassword {
+    right: 10px;
+  }
+  
+  .loginButton {
+    padding: 11px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  
+  .errorMessage {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+/* Móviles pequeños (iPhone SE, etc) */
+@media (max-width: 375px) {
+  .loginContainer {
+    padding: 10px;
+    gap: 20px;
+  }
+  
+  .loginBox {
+    padding: 1.2em;
+    width: 39em;
+  }
+  
+  .loginIcon {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .loginIcon svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .loginHeader h1 {
+    font-size: 20px;
+  }
+  
+  .title {
+    font-size: 1.8em;
+  }
+  
+  .paragraph {
+    font-size: 1em;
+  }
+}
+
+/* Móviles muy pequeños (320px) */
+@media (max-width: 320px) {
+  .loginContainer {
+    padding: 8px;
+    gap: 15px;
+    min-height: 100vh;
+  }
+  
+  .loginBox {
+    padding: 1em;
+    border-radius: 6px;
+  }
+  
+  .loginIcon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+  }
+  
+  .loginIcon svg {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .loginHeader {
+    margin-bottom: 18px;
+  }
+  
+  .loginHeader h1 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .loginHeader p {
+    font-size: 11px;
+  }
+  
+  .formGroup {
+    margin-bottom: 14px;
+  }
+  
+  .formGroup label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .inputWrapper input {
+    padding: 9px 9px 9px 35px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+  
+  .inputIcon {
+    width: 16px;
+    height: 16px;
+    left: 9px;
+  }
+  
+  .togglePassword {
+    right: 9px;
+    padding: 4px;
+  }
+  
+  .togglePassword svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .loginButton {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+  
+  .errorMessage {
+    padding: 9px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+  
+  .title {
+    font-size: 1.6em;
+    margin-bottom: 0.3em;
+  }
+  
+  .paragraph {
+    font-size: 0.9em;
+    line-height: 1.3;
+  }
+  
+  .logoLogin {
+    max-width: 90%;
+  }
+}

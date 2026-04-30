@@ -1,5 +1,7 @@
 /* Contenedor principal del menú de usuario */
 .userMenuWrapper {
+  display: flex;
+  align-items: center;
   position: relative;
   margin-left: auto;
   height: 100%;
@@ -70,6 +72,7 @@
   z-index: 1000;
   animation: slideDown 0.3s ease-out;
   overflow: hidden;
+  margin-top: 23.4em;
 }
 
 /* Información del usuario en dropdown */
