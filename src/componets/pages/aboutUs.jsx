@@ -1,11 +1,11 @@
-import styles from './contactPage.module.css'
+import { MyTemplate } from "../templates/myTemplate";
 
-function AboutUs() {
-  return (
-    <section className={styles.contact}>
-      <h2>Contacto</h2>
-    </section>
+function AboutUs () {
+  return(
+    <MyTemplate>
+      <h2>Sobre nuestra institucion</h2>
+    </MyTemplate>
   )
 }
 
-export { AboutUs }
+export {AboutUs}

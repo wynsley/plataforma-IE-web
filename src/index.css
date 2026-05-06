@@ -1,122 +1,87 @@
+@import "tailwindcss";
+
 /*
 -------------------- FONTS -----------------------
 */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @font-face {
-    font-family: "Michroma";
-    src: url(/src/assets/fonts/Michroma.woff2) format("woff2");
-    font-style: normal;
-    font-weight: 900;
+  font-family: 'Poppins';
+  src: url('/src/assets/fonts/Poppins-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
 }
-
 @font-face {
-    font-family: "Montserrat";
-    src: url(/src/assets/fonts/Montserrat.woff2) format(woff2);
-    font-style: normal;
-    font-weight: normal;
+  font-family: 'Poppins';
+  src: url('/src/assets/fonts/Poppins-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hani';
+  src: url('/src/assets/fonts/Rajdhani-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hani';
+  src: url('/src/assets/fonts/Rajdhani-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
 }
 
+/* =========================
+  THEME (Tailwind v4)
+========================= */
+@theme {
+  /* Colores */
+  --color-blue: rgb(3, 45, 60);
+  --color-blueT: rgba(65, 107, 107, 0.732);
+  --color-golden: #E08433;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+  --color-neutral-white: #FBFCFC;
+
+  /* Fuentes */
+  --font-poppins: "Poppins", sans-serif;
+  --font-hani: "Hani", sans-serif;
+
+  /* Breakpoint */
+  --breakpoint-xs: 375px;
+
+  /* Espaciado */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+
+  /* Sombras */
+  --shadow-soft: 0 4px 10px rgba(0,0,0,0.3);
+  --shadow-medium: 0 6px 16px rgba(0,0,0,0.5);
+  --shadow-strong: 0 10px 25px rgba(0,0,0,0.9);
+
+  /* Bordes */
+  --radius-xl2: 1.5rem;
+  --radius-xl3: 2rem;
+
+  /* Animaciones */
+  --animate-float: float 2s ease-in-out infinite;
+  --animate-scrollLeft: scrollLeft 30s linear infinite;
 }
 
-:root{
-  /* Background colors */
-    --nav-color: #0f131b;
-    --bg-home: #101c26;
-    --bg-courss: #0f131b;
-    --bg-reasons:#0f202a;
-    
-    /*degradado*/
-    --color-blu: #10212b;
-    --color-blu-2: #11141c;
-    /*Colors text and cards*/
-    --text-color:#000000;
-    --text-color-white:#ffffff;
-    --black:#000000;
-    --hover-color:#0f202a;
-    --ski-blue-1:#2fb7d8;
-    --card-border:#0f364a;
-    --card-color:#0f3141;
-    --gray-claro: #302e33;
-    --gray: #191919 ;
-    
-    /*SHADOWS*/
-      
-}
-
-
-
-html{
-  font-size: 62.5%;
-}
-
-body{
-  color: var(--text-color);
-}
-
-/* Ajuste para secciones: usa padding en lugar de min-height fija */
-section{
-  min-height: 100vh;
-  width: 100%;
-  text-align: center;
-  overflow: hidden;
-}
-
-
-
-/*
-================ RESPONSIVE DESIGN ===================
-*/
-@media(max-width: 1200px){
-  html{
-    font-size: 58.5%;
+@layer utilities {
+  @keyframes shine {
+    from {
+      left: -75%;
+    }
+    to {
+      left: 125%;
+    }
   }
-  
 
-
-@media(max-width: 991px){
-  html{
-    font-size: 54.5%;
+  .animate-shine {
+    animation: shine 0.9s ease-in-out;
   }
-  
 }
 
-@media(max-width: 820px){
-  html{
-    font-size: 52%;
-  }
-  
-  
 
- 
-}
 
-@media(max-width: 768px){
-  html{
-    font-size: 48.5%;
-  }
-  
- 
-}
 
-@media(max-width: 480px){
-  html{
-    font-size: 45%;
-  }
-  
-}
 
-@media(max-width: 320px){
-  html{
-    font-size: 42%;
-  }
-  
-}
-}
+

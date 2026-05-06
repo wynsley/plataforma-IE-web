@@ -1,12 +1,12 @@
-import styles from './homePage.module.css'
+import { MyTemplate } from "../templates/myTemplate"
 
 function HomePage() {
   return (
-    <section className={styles.home}>
+    <MyTemplate>
       <h2>
         inicio
       </h2>
-    </section>
+    </MyTemplate>
   )
 }
 

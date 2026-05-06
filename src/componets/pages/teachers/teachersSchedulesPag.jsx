@@ -1,10 +1,10 @@
-
+import { MyTemplate } from "../../templates/myTemplate"
 
 function TeachersSchedules () {
   return(
-    <section>
+    <MyTemplate>
       <h2>Horarios de eclases de los profesores</h2>
-    </section>
+    </MyTemplate>
   )
 }
 

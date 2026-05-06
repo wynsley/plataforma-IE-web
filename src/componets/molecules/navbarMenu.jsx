@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
-import styles from './navbarMenu.module.css';
 import { NavbarLink } from "../atoms/navbarLink";
 
 function NavbarMenu() {
   const [openDropdown, setOpenDropdown] = useState(null);
-  const menuRef = useRef(null); // referencia al contenedor
+  const menuRef = useRef(null);
 
   const menu = [
     {
@@ -31,8 +30,8 @@ function NavbarMenu() {
       href: '/attendance',
       text: 'Asistencias',
       submenu: [
-        { href: '/attendance/entry ', text: 'Entrada' },
-        { href: '/attendance/classroom ', text: 'Aulas' },
+        { href: '/attendance/entry', text: 'Entrada' },
+        { href: '/attendance/classroom', text: 'Aulas' },
       ]
     },
     {
@@ -45,7 +44,7 @@ function NavbarMenu() {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
-  // Detectar clic fuera
+  // cerrar al hacer click fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -54,48 +53,68 @@ function NavbarMenu() {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
-    <ul className={styles.navbarMenu} ref={menuRef}>
+    <ul
+      ref={menuRef}
+      className="flex list-none m-0 p-0 absolute left-1/2 -translate-x-1/2"
+    >
       {menu.map((item, index) => (
-        <li key={index} className={styles.item}>
+        <li
+          key={index}
+          className="
+            h-[4em] px-8 flex items-center relative 
+            transition-colors duration-300 
+            hover:bg-blueT
+          "
+        >
           {item.submenu ? (
-            <div className={styles.dropdownWrapper}>
+            <div className="relative h-full flex items-center">
               <button
                 onClick={() => toggleDropdown(index)}
-                className={styles.dropdownButton}
+                className="flex items-center gap-1 h-full text-white font-poppins text-[.9em]"
               >
                 {item.text}
-                <ChevronDown 
-                  size={16} 
-                  className={`${styles.chevron} ${openDropdown === index ? styles.chevronOpen : ''}`}
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-300 ${
+                    openDropdown === index ? 'rotate-180' : ''
+                  }`}
                 />
               </button>
-              
+
               {openDropdown === index && (
-                <ul className={styles.submenu}>
+                <ul
+                  className="
+                    absolute top-full left-0 
+                    bg-blue shadow-lg py-2 min-w-[200px] z-[1000]
+                    list-none animate-[slideDown_0.3s_ease-out]
+                  "
+                >
                   {item.submenu.map((subitem, subindex) => (
-                    <NavbarLink 
+                    <NavbarLink
                       key={subindex}
-                      href={subitem.href} 
+                      href={subitem.href}
                       text={subitem.text}
                       onClick={() => setOpenDropdown(null)}
-                      className={styles.submenuItem}
+                      variant='submenu'
+                      className="
+                        block px-5 py-2 text-white text-[.8em]
+                        hover:bg-blueT/80 hover:pl-6
+                        transition-all duration-200
+                      "
                     />
                   ))}
                 </ul>
               )}
             </div>
           ) : (
-            <NavbarLink 
-              href={item.href} 
-              text={item.text} 
-              className={styles.linkMenu}
+            <NavbarLink
+              href={item.href}
+              text={item.text}
+              className="text-white text-[.9em]"
             />
           )}
         </li>

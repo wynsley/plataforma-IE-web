@@ -1,10 +1,10 @@
-
+import { MyTemplate } from "../../templates/myTemplate"
 
 function TeachersEvaluations () {
   return(
-    <section>
+    <MyTemplate>
       <h2>seccion de evaluaciones</h2>
-    </section>
+    </MyTemplate>
   )
 }
 

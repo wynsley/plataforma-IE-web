@@ -1,10 +1,10 @@
-
+import { MyTemplate } from "../../templates/myTemplate" 
 
 function StudentsGrades() {
   return (
-    <section>
+    <MyTemplate>
       <h2>Calificaciones</h2>
-    </section>
+    </MyTemplate>
   )
 }
 

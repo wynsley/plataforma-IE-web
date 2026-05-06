@@ -1,131 +1,52 @@
-import { useState } from 'react'
-import { Lock, User, Eye, EyeOff } from 'lucide-react'
-import { Logo } from '../molecules/logo'
-import styles from './loginPage.module.css'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FormLogin } from '../organims/formLogin'
+import { DescriptionLogin } from '../molecules/loginPage/descriptión'
 
 export const LoginPage = ({ onLogin }) => {
 
-  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  })
-  const [error, setError] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
+  const handleLoginSuccess = (user) => {
+    onLogin(user)
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-    setError('')
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setLoading(true)
-    
-    if (!formData.username || !formData.password) {
-      setError('Por favor completa todos los campos')
-      return
-    }
-
-    if (formData.username === 'Wynsley' && formData.password === '1234') {
-      onLogin({
-        username: formData.username,
-        role: 'admin'
-      })
-    } else if (formData.username === 'estudiante' && formData.password === '1234') {
-      onLogin({
-        username: formData.username,
-        role: 'student'
-      })
-    } else if (formData.username === 'profesor' && formData.password === '1234') {
-      onLogin({
-        username: formData.username,
-        role: 'teacher'
-      })
-    } else {
-      setError('Usuario o contraseña incorrectos')
+    // 🔥 redirección según rol
+    switch (user.rol) {
+      case 'administrador':
+        navigate('/admin')
+        break
+      case 'docente':
+        navigate('/teachers/courses')
+        break
+      case 'auxiliar':
+        navigate('/attendance/entry')
+        break
+      case 'alumno':
+        navigate('/students/courses')
+        break
+      default:
+        navigate('/')
     }
   }
 
   return (
-    <div className={styles.loginContainer}>
-      <div className={styles.containerlogo}>
-        <div>
-          <Logo className={styles.logoLogin}/>
-          <h2 className={styles.title}>Sistema de educación virtual</h2>
-          <p className={styles.paragraph}>Plataforma virtual integral diseñada 
-            para fortalecer la gestión académica y administrativa 
-            en instituciones educativas.</p>
-        </div>
+    <div className="min-h-screen flex flex-col md:flex-row font-[Poppins] overflow-hidden">
+
+      {/* LEFT */}
+      <div className="md:flex md:w-1/2 bg-linear-to-br from-[#032d3c] via-[#054d6a] to-[#0a7ea4] text-white 
+        items-center justify-center p-10 relative">
+        <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white/5" />
+        <div className="absolute -bottom-16 -right-16 w-60 h-60 rounded-full bg-white/10" />
+        <DescriptionLogin />
       </div>
-      <div className={styles.loginBox}>
-        <div className={styles.loginHeader}>
-          <div className={styles.loginIcon}>
-            <Lock size={40} />
-          </div>
-          <h1>Bienvenido</h1>
-          <p>A tu plataforma virtual</p>
-        </div>
 
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
-          <div className={styles.formGroup}>
-            <label htmlFor="username">Usuario</label>
-            <div className={styles.inputWrapper}>
-              <User className={styles.inputIcon} size={20} />
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                placeholder="Ingresa tu usuario"
-                autoComplete="username"
-              />
-            </div>
-          </div>
+      {/* RIGHT */}
+      <div className="flex-1 flex items-center justify-center px-6 py-10 relative overflow-hidden bg-white">
 
-          <div className={styles.formGroup}>
-            <label htmlFor="password">Contraseña</label>
-            <div className={styles.inputWrapper}>
-              <Lock className={styles.inputIcon} size={20} />
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Ingresa tu contraseña"
-                autoComplete="current-password"
-              />
-              <button
-                type="button"
-                className={styles.togglePassword}
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-          </div>
+        <div className="absolute inset-0 bg-[radial-gradient(500px_circle_at_0%_0%,rgba(166,166,166,0.45),transparent_70%)]"/>
+        <div className="absolute inset-0 bg-[radial-gradient(600px_circle_at_100%_100%,rgba(3,45,60,0.12),transparent_70%)]"/>
 
-          {error && (
-            <div className={styles.errorMessage}>
-              {error}
-            </div>
-          )}
-
-          <button 
-            type="submit" 
-            className={styles.loginButton}
-            onClick={handleSubmit}
-            disabled={loading}
-            >
-            {loading ? 'Cargando...' : 'Inicias Seción'}
-          </button>
-        </form>
+        <FormLogin onLogin={handleLoginSuccess} />
       </div>
     </div>
   )

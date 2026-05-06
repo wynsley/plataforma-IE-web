@@ -1,9 +1,9 @@
-
+import { MyTemplate } from "../../templates/myTemplate" 
 function StudentsAttendance () {
   return (
-    <section>
+    <MyTemplate>
       <h2>Asistencia</h2>
-    </section>
+    </MyTemplate>
   )
 }
 

@@ -1,6 +1,6 @@
 function MyTemplate({ children }) {
   return (
-    <div>
+    <div className="pt-[4em]">
       {children}
     </div>
   )

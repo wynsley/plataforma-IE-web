@@ -1,22 +1,46 @@
-import { Link } from "../atoms/customLink"
-import { Microscope } from "lucide-react";
-import styles from './logo.module.css'
+import { Link } from "react-router-dom";
 
-function Logo({ absolute = false, className = "" }) {
-  const nameLogo = 'SmartWeb'
+function Logo({ variant= 'default' }) {
+  const variants = {
+    default: `relative w-[10em] h-[10em] rounded-full overflow-hidden top-10`,
+    primary: `relative w-[10em] h-[10em] rounded-full overflow-hidden `
 
-  const combinedClass = `${styles.logo} ${absolute ? styles.absolute : ''} ${className}`
-
+  }
   return (
-    <div className={combinedClass}>
-      <Link href='/' className={styles.logoLink}>
-        <span className={styles.logoIcon}>
-          <Microscope size={50} strokeWidth={2} />
-        </span>
-        <span className={styles.logoName}>{nameLogo}</span>
+    <div
+      className={`
+        ${variants[variant] || variants.default}
+        group
+      `}
+    >
+      {/* Shine effect */}
+      <span
+        className="
+          pointer-events-none absolute top-0 left-[-75%]
+          w-[50%] h-full
+          bg-gradient-to-r from-transparent via-amber-400/40 to-transparent
+          skew-x-[-25deg]
+          group-hover:animate-[shine_0.9s_ease-in-out]
+        "
+      />
+
+      <Link
+        to="/"
+        className="
+          relative z-10 flex items-center justify-center
+          w-full h-full
+          bg-brown-700 text-beige
+          transition-colors duration-300
+        "
+      >
+        <img
+          src="/LOGO.png"
+          alt="Logo Institucional"
+          className="w-[88%] h-[88%] object-contain transition-transform duration-300"
+        />
       </Link>
     </div>
-  )
+  );
 }
 
-export { Logo }
+export { Logo };

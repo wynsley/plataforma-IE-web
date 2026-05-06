@@ -1,9 +1,0 @@
-.notificactions{
-  color: white;
-  transition: background-color 0.4s;
-  padding:1em  ;
-}
-
-.notificactions:hover{
-  background-color: rgba(65, 107, 107, 0.732);
-}

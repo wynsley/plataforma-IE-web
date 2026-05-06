@@ -1,8 +1,10 @@
+import { MyTemplate } from "../../templates/myTemplate"
+
 function StudentsSchedules() {
   return (
-    <section>
+    <MyTemplate>
       <h2>Horarios</h2>
-    </section>
+    </MyTemplate>
   )
 }
 

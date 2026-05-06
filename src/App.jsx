@@ -1,183 +1,165 @@
 import { useState, useEffect, useRef } from 'react'
 import { Route, Routes } from 'react-router-dom'
+// PAGES
 import { LoginPage } from './componets/pages/loginPage'
 import { Navbar } from './componets/organims/navbar'
-//  PRINCIPALS PAGES
 import { HomePage } from './componets/pages/homePage'
 import { AboutUs } from './componets/pages/aboutUs'
-// STUDENTS MENU
+// STUDENTS
 import { StudentsSchedules } from './componets/pages/students/studentsSchedulesPage'
 import { StudentesCourses } from './componets/pages/students/studentsCoursesPage'
 import { StudentsGrades } from './componets/pages/students/studentsGradesPage'
 import { StudentsAttendance } from './componets/pages/students/studentsAttendance'
-//TEACHERS MENU
+// TEACHERS
 import { TeachersCourses } from './componets/pages/teachers/teachersCoursesPage'
 import { TeachersSchedules } from './componets/pages/teachers/teachersSchedulesPag'
 import { TeachersEvaluations } from './componets/pages/teachers/teachersEvaluationsPage'
-//ATTENDANCES MENU
+// ATTENDANCE
 import { Entry } from './componets/pages/attendances/entry'
 import { Classroom } from './componets/pages/attendances/classroom'
-import './App.css'
+// MODALS
+import { ModalNotifications } from './componets/modals/modalNotifications'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userData, setUserData] = useState(null)
+
   const inactivityTimerRef = useRef(null)
+  const lastResetRef = useRef(0)
 
-  // Tiempo máximo de inactividad (30 minutos)
-  const INACTIVITY_TIME = 3 * 60 * 1000 // 30 min en ms
+  const [modalNotiIsOpen, setMOdalNotiIsOpen] = useState(false)
 
-  // Al iniciar, verificamos si hay sesión guardada en localStorage
+  const INACTIVITY_TIME = 1 * 60 * 1000 // 20 min
+
+  // =========================
+  // LOGIN CHECK
+  // =========================
   useEffect(() => {
-    const savedUser = localStorage.getItem(userData)
+    const savedUser = localStorage.getItem('userData')
     const savedAuth = localStorage.getItem('isAuthenticated')
     const lastActivity = localStorage.getItem('lastActivity')
 
     if (savedUser && savedAuth === 'true') {
-      // Verificar si la sesión expiró mientras estaba cerrada la pestaña
       if (lastActivity) {
-        const timeSinceLastActivity = Date.now() - parseInt(lastActivity)
-        if (timeSinceLastActivity > INACTIVITY_TIME) {
-          // Sesión expirada
+        const diff = Date.now() - parseInt(lastActivity)
+        if (diff > INACTIVITY_TIME) {
           handleLogout()
           return
         }
       }
-      
+
       setIsAuthenticated(true)
       setUserData(JSON.parse(savedUser))
       localStorage.setItem('lastActivity', Date.now().toString())
     }
   }, [])
 
-  // Cuando el usuario inicia sesión
+  // =========================
+  // LOGIN / LOGOUT
+  // =========================
   const handleLogin = (user) => {
     setIsAuthenticated(true)
     setUserData(user)
+
     localStorage.setItem('isAuthenticated', 'true')
     localStorage.setItem('userData', JSON.stringify(user))
     localStorage.setItem('lastActivity', Date.now().toString())
   }
 
-  // Cuando el usuario cierra sesión
   const handleLogout = () => {
     setIsAuthenticated(false)
     setUserData(null)
+
     localStorage.removeItem('isAuthenticated')
     localStorage.removeItem('userData')
     localStorage.removeItem('lastActivity')
-    
-    // Limpiar el timer si existe
+
     if (inactivityTimerRef.current) {
       clearTimeout(inactivityTimerRef.current)
     }
   }
 
-  // Control del tiempo de inactividad
+  // =========================
+  // INACTIVITY SYSTEM (FIXED)
+  // =========================
   useEffect(() => {
     if (!isAuthenticated) return
 
     const resetTimer = () => {
-      // Limpiar timer anterior
+      const now = Date.now()
+
+      // debounce 1s
+      if (now - lastResetRef.current < 1000) return
+      lastResetRef.current = now
+
+      // clear previous timer
       if (inactivityTimerRef.current) {
         clearTimeout(inactivityTimerRef.current)
       }
 
-      // Actualizar última actividad
-      localStorage.setItem('lastActivity', Date.now().toString())
+      localStorage.setItem('lastActivity', now.toString())
 
-      // Crear nuevo timer
       inactivityTimerRef.current = setTimeout(() => {
-        alert('Tu sesión ha expirado por inactividad. Por favor, inicia sesión nuevamente.')
+        alert('Sesión cerrada por inactividad')
         handleLogout()
       }, INACTIVITY_TIME)
     }
 
-    // Eventos que indican actividad del usuario
-    const activityEvents = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart']
-    
-    activityEvents.forEach(event => {
-      window.addEventListener(event, resetTimer)
-    })
+    const events = ['click', 'keydown', 'scroll', 'mousemove']
 
-    // Iniciar el timer al montar
+    events.forEach(e => window.addEventListener(e, resetTimer))
+
     resetTimer()
 
-    // Cleanup al desmontar
     return () => {
       if (inactivityTimerRef.current) {
         clearTimeout(inactivityTimerRef.current)
       }
-      activityEvents.forEach(event => {
-        window.removeEventListener(event, resetTimer)
-      })
+      events.forEach(e => window.removeEventListener(e, resetTimer))
     }
   }, [isAuthenticated])
 
+  // =========================
+  // ROUTES
+  // =========================
   const pages = [
-    { 
-      path: '/', 
-      component: HomePage 
-    },
-    { 
-      path: '/students/schedules', 
-      component: StudentsSchedules 
-    },
-    { 
-      path: '/students/courses', 
-      component: StudentesCourses 
-    },
-    { 
-      path: '/students/grades', 
-      component: StudentsGrades 
-    },
-    { 
-      path: '/students/attendance', 
-      component: StudentsAttendance 
-    },
-    { 
-      path: '/teachers/courses', 
-      component: TeachersCourses 
-    },
-    { 
-      path: '/teachers/schedule', 
-      component: TeachersSchedules 
-    },
-    { 
-      path: '/teachers/evaluations', 
-      component: TeachersEvaluations 
-    },
-    { 
-      path: '/attendance/entry', 
-      component: Entry 
-    },
-    { 
-      path: '/attendance/classroom', 
-      component: Classroom 
-    },
-    { 
-      path: '/aboutUs', 
-      component: AboutUs 
-    },
-    
+    { path: '/', component: <HomePage /> },
+    { path: '/students/schedules', component: <StudentsSchedules /> },
+    { path: '/students/courses', component: <StudentesCourses /> },
+    { path: '/students/grades', component: <StudentsGrades /> },
+    { path: '/students/attendance', component: <StudentsAttendance /> },
+    { path: '/teachers/courses', component: <TeachersCourses /> },
+    { path: '/teachers/schedule', component: <TeachersSchedules /> },
+    { path: '/teachers/evaluations', component: <TeachersEvaluations /> },
+    { path: '/attendance/entry', component: <Entry /> },
+    { path: '/attendance/classroom', component: <Classroom /> },
+    { path: '/aboutUs', component: <AboutUs /> },
   ]
 
-  // Si no está autenticado, mostrar login
+  // =========================
+  // LOGIN GATE
+  // =========================
   if (!isAuthenticated) {
     return <LoginPage onLogin={handleLogin} />
   }
 
-  //  Si está autenticado, renderizar la app normalmente
+  // =========================
+  // APP
+  // =========================
   return (
     <>
-      <Navbar/>
+      <Navbar setMOdalNotiIsOpen={setMOdalNotiIsOpen} />
+
+      {modalNotiIsOpen && (
+        <ModalNotifications setMOdalNotiIsOpen={setMOdalNotiIsOpen} />
+      )}
+
       <Routes>
         {pages.map((route, index) => (
-          <Route key={index} path={route.path} Component={route.component} />
+          <Route key={index} path={route.path} element={route.component} />
         ))}
       </Routes>
     </>
-    
   )
 }
 
