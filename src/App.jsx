@@ -23,17 +23,16 @@ import { ModalNotifications } from './componets/modals/modalNotifications'
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userData, setUserData] = useState(null)
-
   const inactivityTimerRef = useRef(null)
   const lastResetRef = useRef(0)
 
-  const [modalNotiIsOpen, setMOdalNotiIsOpen] = useState(false)
+  //MODALS
+  const [modalNotiOpen, setModalNotiOpen] = useState(false) 
 
-  const INACTIVITY_TIME = 1 * 60 * 1000 // 20 min
+  const INACTIVITY_TIME = 30 * 60 * 1000 // 20 min
 
-  // =========================
   // LOGIN CHECK
-  // =========================
+
   useEffect(() => {
     const savedUser = localStorage.getItem('userData')
     const savedAuth = localStorage.getItem('isAuthenticated')
@@ -54,9 +53,7 @@ function App() {
     }
   }, [])
 
-  // =========================
   // LOGIN / LOGOUT
-  // =========================
   const handleLogin = (user) => {
     setIsAuthenticated(true)
     setUserData(user)
@@ -79,9 +76,9 @@ function App() {
     }
   }
 
-  // =========================
+
   // INACTIVITY SYSTEM (FIXED)
-  // =========================
+
   useEffect(() => {
     if (!isAuthenticated) return
 
@@ -119,11 +116,9 @@ function App() {
     }
   }, [isAuthenticated])
 
-  // =========================
   // ROUTES
-  // =========================
   const pages = [
-    { path: '/', component: <HomePage /> },
+    { path: '/', component: <HomePage userData={userData}/> },
     { path: '/students/schedules', component: <StudentsSchedules /> },
     { path: '/students/courses', component: <StudentesCourses /> },
     { path: '/students/grades', component: <StudentsGrades /> },
@@ -136,24 +131,21 @@ function App() {
     { path: '/aboutUs', component: <AboutUs /> },
   ]
 
-  // =========================
   // LOGIN GATE
-  // =========================
   if (!isAuthenticated) {
     return <LoginPage onLogin={handleLogin} />
   }
 
-  // =========================
   // APP
-  // =========================
+
   return (
     <>
-      <Navbar setMOdalNotiIsOpen={setMOdalNotiIsOpen} />
+      <Navbar 
+        setModalNotiOpen={setModalNotiOpen} 
+        handleLogout={handleLogout}
+      />
 
-      {modalNotiIsOpen && (
-        <ModalNotifications setMOdalNotiIsOpen={setMOdalNotiIsOpen} />
-      )}
-
+      {modalNotiOpen && <ModalNotifications setModalNotiOpen={setModalNotiOpen}/>}
       <Routes>
         {pages.map((route, index) => (
           <Route key={index} path={route.path} element={route.component} />

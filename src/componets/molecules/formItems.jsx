@@ -57,6 +57,8 @@ function FormItem({
                       variant={inputVariant}
                       align={inputAlign}
                       size={inputSize}
+                      icon={item.icon}
+                      onIconClick={item.onIconClick}
                     />
                   )}
 
@@ -95,6 +97,8 @@ function FormItem({
                 align={inputAlign}
                 size={inputSize}
                 variant={inputVariant}
+                icon={item.icon}
+                onIconClick={item.onIconClick}
               />
             )}
 

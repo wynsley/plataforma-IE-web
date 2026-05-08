@@ -12,8 +12,8 @@ function Paragraph ({
   const variants ={
     default: 'text-black',
     primary: 'text-white',
-    secondary: 'text-gray-500 ',
-    danger: 'text-blue-dark'
+    secondary: 'text-white/70  ',
+    danger: 'text-blue'
   };
 
   const alignments = {

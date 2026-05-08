@@ -10,7 +10,7 @@ export const LoginPage = ({ onLogin }) => {
   const handleLoginSuccess = (user) => {
     onLogin(user)
 
-    // 🔥 redirección según rol
+    // redirección según rol
     switch (user.rol) {
       case 'administrador':
         navigate('/admin')

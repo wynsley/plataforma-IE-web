@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Logo({ variant= 'default' }) {
   const variants = {
-    default: `relative w-[10em] h-[10em] rounded-full overflow-hidden top-10`,
+    default: `relative w-[8em] h-[8em] rounded-full overflow-hidden mt-13`,
     primary: `relative w-[10em] h-[10em] rounded-full overflow-hidden `
 
   }
@@ -10,7 +10,7 @@ function Logo({ variant= 'default' }) {
     <div
       className={`
         ${variants[variant] || variants.default}
-        group
+        group 
       `}
     >
       {/* Shine effect */}
@@ -18,7 +18,7 @@ function Logo({ variant= 'default' }) {
         className="
           pointer-events-none absolute top-0 left-[-75%]
           w-[50%] h-full
-          bg-gradient-to-r from-transparent via-amber-400/40 to-transparent
+          bg-linear-to-r from-transparent via-amber-400/40 to-transparent
           skew-x-[-25deg]
           group-hover:animate-[shine_0.9s_ease-in-out]
         "

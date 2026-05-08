@@ -30,13 +30,13 @@
 }
 
 /* =========================
-  THEME (Tailwind v4)
+  THEME
 ========================= */
 @theme {
   /* Colores */
   --color-blue: rgb(3, 45, 60);
   --color-blueT: rgba(65, 107, 107, 0.732);
-  --color-golden: #E08433;
+  --color-darkB: #012133;
 
   --color-neutral-white: #FBFCFC;
 
