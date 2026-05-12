@@ -3,6 +3,7 @@ import { Banner } from "../organims/homePage/banner"
 import { useEffect, useState } from "react"
 import { CalendarRange } from "lucide-react"
 import { CardStats } from "../organims/homePage/cardStats"
+import { Overview } from "../organims/homePage/homeOverview"
 
 
 function HomePage({ userData }) {
@@ -86,6 +87,9 @@ function HomePage({ userData }) {
       <CardStats
         visible={visible}
         stats={stats}
+      />
+      <Overview
+        visible={visible}
       />
     </MyTemplate>
   )

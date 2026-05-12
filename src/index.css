@@ -37,8 +37,10 @@
   --color-blue: rgb(3, 45, 60);
   --color-blueT: rgba(65, 107, 107, 0.732);
   --color-darkB: #012133;
+  --color-borderC: rgb(3, 45, 60, 0.5);
+  --color-cyanO: #0E7490;
+  --color-cyanC: #06B6D4,
 
-  --color-neutral-white: #FBFCFC;
 
   /* Fuentes */
   --font-poppins: "Poppins", sans-serif;

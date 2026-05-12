@@ -11,9 +11,9 @@ function Paragraph ({
 
   const variants ={
     default: 'text-black',
-    primary: 'text-white',
+    primary: 'text-cyan-700',
     secondary: 'text-white/70  ',
-    danger: 'text-blue'
+    danger: 'text-blueT'
   };
 
   const alignments = {
@@ -26,7 +26,7 @@ function Paragraph ({
     base : "text-base",
     small:  "text-[0.6em] sm:text-[.7em] md:text-[.9em]",
     medium: "text-[.5em] xs:text-[.8em] sm:text-[.9em] md:text-[1em] lg:text-[1.1em]" ,
-    large:  "text-[.7em] sm:text-[.9em] lg:text-[1.2em] xl:text-[1.3em]",
+    large:  "text-[.9em] lg:text-[1.2em] xl:text-[1.3em]",
     slogan : "text-[.9em] sm:text-[1.2em] lg:text-[1.2em] xl:text-[1.3em]",
   };
 

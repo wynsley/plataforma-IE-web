@@ -73,7 +73,7 @@ function NavbarMenu() {
   }, []);
 
   return (
-    <>
+    <div ref={menuRef}>
       {/* HAMBURGER */}
       <button
         className="md:hidden text-white z-50 relative"
@@ -86,8 +86,8 @@ function NavbarMenu() {
       <ul
         ref={menuRef}
         className="
-          hidden md:flex
-          list-none m-0 p-0
+          hidden md:flex top-0 h-full
+          list-none m-0 p-0 
           absolute left-1/2 -translate-x-1/2
         "
       >
@@ -176,7 +176,7 @@ function NavbarMenu() {
         setOpenDropdown={setOpenDropdown}
         setMobileOpen={setMobileOpen}
       />
-    </>
+    </div>
   );
 }
 

@@ -6,7 +6,7 @@ import { UserMenuModal } from '../modals/modalsUser/userMenuModal';
 import { UserNavbar } from '../molecules/userNavbar';
 import { ChangePasswordModal } from '../modals/modalsUser/userPasswordModal';
 
-function UserMenu({ onLogout, handleLogout }) {
+function UserMenu({ onLogout, handleLogout, mobile = false }) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const user = {
@@ -16,13 +16,22 @@ function UserMenu({ onLogout, handleLogout }) {
   };
 
   return (
-    <div className=" flex-col items-end hidden md:flex  md:flex-row md:items-center md:relative ml-auto h-full">
+    <div className={`
+        ${mobile
+          ? "flex w-full mt-4 justify-end border-t border-white/10 pt-4"
+          : `flex-col items-end hidden 
+            md:flex  md:flex-row md:items-center md:relative ml-auto h-full`
+        }
+      
+      `}
+    >
       {/*icono notificaciones*/}
-      <div className="text-white  lg:p-[1em]  
-      transition-colors duration-400 hover:bg-blueT
+      <div className="text-white p-[1em]  
+      transition-colors duration-400 hover:bg-blueT border-r boder-white
     ">
         <Bell />
       </div>
+
       {/*Usuario en el navbar */}
       <UserNavbar 
         user= {user}

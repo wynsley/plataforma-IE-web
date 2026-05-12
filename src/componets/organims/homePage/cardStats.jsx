@@ -14,7 +14,7 @@ function CardStats ({visible, stats }) {
         }`}>
           {stats.map((s, i) => (
             <div key={i} className="bg-white rounded-md p-4 
-              shadow-md shadow-blue/20 border border-[#032d3c]
+              shadow-md shadow-blue/20 border border-borderC
               md:w-40
               lg:w-50
             ">

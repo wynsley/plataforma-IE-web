@@ -98,7 +98,7 @@ function FormLogin({ onLogin }) {
         bg-[#f6f6f6] rounded-lg shadow-lg shadow-blue/20
         flex flex-col gap-5 p-6 z-999
         transition-all duration-400
-        border border-gray-500/30
+        border border-gray-500/30 font-poppins
       "
     >
       {error && (

@@ -3,6 +3,7 @@
 import { ChevronDown } from "lucide-react";
 
 import { NavbarLink } from "../atoms/navbarLink";
+import { UserMenu } from "../organims/userMenu";
 
 function MobileMenu({
   menu,
@@ -11,19 +12,21 @@ function MobileMenu({
   toggleDropdown,
   setOpenDropdown,
   setMobileOpen,
+  handleLogout
 }) {
   return (
     <div
       className={`
         md:hidden
         absolute
-        top-[4em]
+        top-0
         left-0
         w-full
         bg-blue
         shadow-md
         z-40
-        px-6
+        pl-6
+        pr-0
         py-4
         transition-all duration-300
 
@@ -40,10 +43,10 @@ function MobileMenu({
             {item.submenu ? (
               <>
                 <button
-                  onClick={() => toggleDropdown(i)}
+                  onClick={() => toggleDropdown(item.text)}
                   className="
                     w-full
-                    flex items-center justify-between
+                    flex items-center gap-2
                     text-white
                     py-3
                     border-b border-white/10
@@ -54,12 +57,12 @@ function MobileMenu({
                   <ChevronDown
                     size={18}
                     className={`transition-transform duration-300 ${
-                      openDropdown === i ? "rotate-180" : ""
+                      openDropdown === item.text ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
-                {openDropdown === i && (
+                {openDropdown === item.text && (
                   <ul
                     className="
                       flex flex-col
@@ -106,6 +109,10 @@ function MobileMenu({
           </li>
         ))}
       </ul>
+      <UserMenu
+        mobile = {true}
+        handleLogout={handleLogout} 
+      />
     </div>
   );
 }
